@@ -60,16 +60,8 @@ const showModalDetails = (data)=>{
             <div class="flex-row">
                 <div class="modal-card">
                     <h2 class="font-primary">${data.description}</h2>
-                    <div class="modal-inside">
-                        <div class="billing">
-                            <p class="font-secondary green"> ${(data.pricing[0].price === '0' || data.pricing[0].price === 'No cost' || !data.pricing[0].price  ) ? 'Free of Cost/' : data.pricing[0].price} <br> Basic</p>
-                        </div>
-                        <div class="billing">
-                            <p class="font-secondary orange">${(data.pricing[1].price === '0' || data.pricing[0].price === 'No cost' || !data.pricing[1].price) ? 'Free of Cost/' : data.pricing[1].price} <br> Pro</p>
-                        </div>
-                        <div class="billing">
-                            <p class="font-secondary red">${(data.pricing[2].price === '0' || data.pricing[0].price === 'No cost' || !data.pricing[2].price ) ? 'Free Of Cost/': data.pricing[2].price}<br> Enterprise </p>
-                        </div>
+                    <div class="modal-inside" id='modal-inside'>
+                        
                     </div>
                     <div class="flex-between-row">
                         <div class="">
@@ -103,6 +95,19 @@ const showModalDetails = (data)=>{
             <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="55px" height="55px" class=" icon-cancel" onclick='CloseModal()' viewBox="0 0 24 24"><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg>
     `;
     const ulElement = document.getElementById('integrationsList');
+
+    const divElement = document.getElementById('modal-inside');
+
+    data.pricing.forEach(priceElement=>{
+        const div = document.createElement('div');
+        console.log(priceElement.price);
+        div.classList.add('billing');
+        div.innerHTML = `
+        <p class="font-secondary green"> ${(priceElement.price === '0' || priceElement.price === 'No cost' ) ? 'Free of Cost/' : priceElement.price} <br> ${priceElement.plan} </p>
+        `;
+
+        divElement.appendChild(div);
+    });
     
     data.integrations.forEach(integration => {
         const li = document.createElement('li');
