@@ -25,6 +25,10 @@ function CloseModal(){
     modal.close();
 }
 
+function isArrayAndNotNull(value) {
+  return value !== null && Array.isArray(value);
+}
+
 
 function MoreBtn(){
     limit = true;
@@ -84,11 +88,10 @@ const showModalDetails = (data)=>{
                     </div>
                 </div>
 
-                <div class="modal-card">
+                <div class="modal-card" id='modal-card'>
                     <img src="${data.image_link[0]}" class="image-modal-fluid" alt="image">
                     <div class="text-center">
-                        <h3 class="font-primary">${data.input_output_examples[0].input}</h3>
-                        <p class="paragraph-text">${data.input_output_examples[0].output}</p>
+                        
                     </div>
                 </div>
             </div>>
@@ -98,22 +101,60 @@ const showModalDetails = (data)=>{
 
     const divElement = document.getElementById('modal-inside');
 
-    data.pricing.forEach(priceElement=>{
-        const div = document.createElement('div');
-        console.log(priceElement.price);
-        div.classList.add('billing');
-        div.innerHTML = `
-        <p class="font-secondary green"> ${(priceElement.price === '0' || priceElement.price === 'No cost' ) ? 'Free of Cost/' : priceElement.price} <br> ${priceElement.plan} </p>
-        `;
+    const modalCard = document.getElementById('modal-card');
 
-        divElement.appendChild(div);
-    });
+    if(isArrayAndNotNull(data.pricing)){
+        data.pricing.forEach(priceElement=>{
+            const div = document.createElement('div');
+            console.log(priceElement.price);
+            div.classList.add('billing');
+            div.innerHTML = `
+            <p class="font-secondary green"> ${(priceElement.price === '0' || priceElement.price === 'No cost' ) ? 'Free of Cost/' : priceElement.price} <br> ${priceElement.plan} </p>
+            `;
+            divElement.appendChild(div);
+        });
+    }
+
+    if(isArrayAndNotNull(data.integrations)){
+        data.integrations.forEach(integration => {
+            const li = document.createElement('li');
+            li.textContent = integration;
+            ulElement.appendChild(li);
+        });
+    };
+
+
     
-    data.integrations.forEach(integration => {
-        const li = document.createElement('li');
-        li.textContent = integration;
-        ulElement.appendChild(li);
-    });
+    // data.input_output_examples.forEach(element=>{
+    //     const div = document.createElement('div');
+    //     console.log(element);
+    //     div.classList.add('text-center');
+    //     div.innerHTML = `
+    //     <h3 class="font-primary">${element[0].input}</h3>
+    //     <p class="paragraph-text">${element[0].output}</p>
+    //     `;
+
+    //     modalCard.appendChild(div);
+    // });
+
+    if(isArrayAndNotNull(data.input_output_examples)){
+        for (let i = 0; i < 1; i++) {
+            const div = document.createElement('div');
+            console.log(data.input_output_examples[i]);
+            div.classList.add('text-center');
+            div.innerHTML = `
+            <h3 class="font-primary">${data.input_output_examples[i].input}</h3>
+            <p class="paragraph-text">${data.input_output_examples[i].output}</p>
+            `;
+            modalCard.appendChild(div);
+        }
+    }
+    
+    
+
+
+
+
 
 }
 
