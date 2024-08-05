@@ -32,6 +32,7 @@ function isArrayAndNotNull(value) {
 
 function MoreBtn(){
     limit = true;
+    loading(true);
     loadData();
     moreBtn.classList.add('hide');
 }
@@ -42,9 +43,30 @@ const loadData = async()=>{
     const data = await response.json();
     const dataArray = data.data.tools;
     showData(dataArray);
-
-
 }
+
+
+
+const checkData = async (url) => {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {  
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.indexOf('application/json') !== -1) {
+            const data = await response.json();
+            console.log('JSON data:', data);
+        } else {
+            console.warn('Response is not JSON:', contentType);
+        }
+    } catch (error) {
+        console.error('Fetch error:', error);
+    }
+}
+
+
 
 const loadModalDetails = async(id)=>{
     url=`https://openapi.programming-hero.com/api/ai/tool/${id}`;
@@ -122,9 +144,6 @@ const showModalDetails = (data)=>{
             ulElement.appendChild(li);
         });
     };
-
-
-    
     // data.input_output_examples.forEach(element=>{
     //     const div = document.createElement('div');
     //     console.log(element);
@@ -149,17 +168,11 @@ const showModalDetails = (data)=>{
             modalCard.appendChild(div);
         }
     }
-    
-    
-
-
-
-
-
 }
 
 function sortBtn(){
     sort = true;
+    loading(true);
     loadData();
 }
 
@@ -187,13 +200,15 @@ const showData = (data)=>{
         data=data.slice(0,6);
     };
     
-    
-
     // data = sortByDate(data);
+
 
     const grid = document.getElementById('grid');
     grid.innerHTML = ``;
     data.forEach(element => {
+
+        // (checkData(`${element.image}`));
+        
         const div = document.createElement('div');
         div.classList.add('col');
 
@@ -226,6 +241,28 @@ const showData = (data)=>{
         `;
         grid.appendChild(div);
     });
+
+    loading(false)
+}
+
+function loading(isLoading){
+    const spinner = document.getElementById('spinner'); 
+    if(isLoading){
+        spinner.classList.remove('loader--hidden');
+    }
+    else{
+        spinner.classList.add('loader--hidden');
+    }
 }
 
 loadData();
+
+// window.addEventListener("load", () => {
+//   const loader = document.querySelector(".loader");
+
+//   loader.classList.add("loader--hidden");
+
+//   loader.addEventListener("transitionend", () => {
+//     document.body.removeChild(loader);
+//   });
+// });
