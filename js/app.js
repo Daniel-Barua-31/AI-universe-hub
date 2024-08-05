@@ -1,4 +1,6 @@
 const modal = document.getElementById('modal');
+let sort = false;
+let limit = false;
 //const openModal = document.querySelector('.open-modal');
 // const closeModal = document.querySelector('.close-modal');
 
@@ -25,16 +27,17 @@ function CloseModal(){
 
 
 function MoreBtn(){
-    loadData(false);
+    limit = true;
+    loadData();
     moreBtn.classList.add('hide');
 }
 
-const loadData = async(limit)=>{
+const loadData = async()=>{
     url = `https://openapi.programming-hero.com/api/ai/tools`;
     const response = await fetch(url);
     const data = await response.json();
-    
-    showData(data.data.tools,limit);
+    const dataArray = data.data.tools;
+    showData(dataArray);
 
 
 }
@@ -110,30 +113,32 @@ const showModalDetails = (data)=>{
 }
 
 function sortBtn(){
-    // loadData(false,true);
+    sort = true;
+    loadData();
 }
 
-
-
+// const sortBtn = ()=>{
+//     sort = true;
+//     loadData();
+// }
 
 const sortByDate = (array)=>{
     array.sort((a, b) => {
         return new Date(b.published_in) - new Date(a.published_in);
     });
-
     return array;
 }
 
 
-const showData = (data,limit)=>{
+const showData = (data)=>{
     console.log(data);
     console.log(limit);
-
-    
-
-    if(limit){
+    console.log(sort);
+    if(sort){
+        data = sortByDate(data);
+    }
+    if(!limit){
         data=data.slice(0,6);
-
     };
     
     
@@ -177,4 +182,4 @@ const showData = (data,limit)=>{
     });
 }
 
-loadData(true);
+loadData();
