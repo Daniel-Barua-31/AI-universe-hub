@@ -137,6 +137,8 @@
 }
 
 .icon-cancel{
+    width: 55px;
+    height: 55px;
     position: absolute;
     top: -20px;
     right:  -20px; 
@@ -269,7 +271,7 @@ svg:hover{
     }
 
     .modal{
-        max-width: 400px;
+        max-width: 30px;
         padding: 5px;
     }
 
@@ -300,7 +302,25 @@ svg:hover{
     .billing{
         padding: 5px;
     }
+    
     .font-secondary{
-        font-size: 8px;
+        font-size: 10px;
     }
+
+    /* .icon-cancel{
+        width: 20px;
+        height: 20px;
+    } */
+
+    .icon-cancel{
+        width: 30px;
+        height: 30px;
+        top: -8px;
+        right:  -8px; 
+    }
+
+    .headline-text{
+        font-size: 32px;
+    }
+
 }
