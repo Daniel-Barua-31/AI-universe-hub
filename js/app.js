@@ -151,6 +151,15 @@ const showModalDetails = (data)=>{
         ulElement.appendChild(li);
     }
 
+    if(data.accuracy.score){
+        const div = document.createElement('div');
+        div.classList.add('accuracy');
+        div.innerHTML = `
+        <p>${data.accuracy.score*100}% accuracy </p>
+        `;
+        modalCard.prepend(div);
+    }
+
     // data.input_output_examples.forEach(element=>{
     //     const div = document.createElement('div');
     //     console.log(element);

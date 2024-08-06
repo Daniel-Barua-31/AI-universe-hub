@@ -180,6 +180,19 @@ svg:hover{
 }
 
 
+.accuracy {
+    border: 1px solid rgb(228, 228, 228);
+    background-color: #eb5757;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 16px;
+    padding: 2px 5px;
+    margin-bottom: 10px;
+    align-self: flex-start; 
+    width: fit-content;
+}
+
 
 /* CSS LOAD */
 
