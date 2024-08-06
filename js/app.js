@@ -80,8 +80,6 @@ const showModalDetails = (data)=>{
     
     const modal = document.getElementById('modal');
 
-
-
     modal.innerHTML = `
             <div class="flex-row">
                 <div class="modal-card">
@@ -110,7 +108,7 @@ const showModalDetails = (data)=>{
                     </div>
                 </div>
 
-                <div class="modal-card" id='modal-card'>
+                <div class="modal-card img-details-modal" id='modal-card'>
                     
                     <img src="${data.image_link[0]}" class="image-modal-fluid" alt="image">
                     <div class="text-center">

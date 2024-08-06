@@ -77,6 +77,11 @@
     border-radius: 16px;
 }
 
+.card-body{
+    display: flex;
+    flex-direction: column;
+}
+
 .font-primary{
     font-size: 25px;
     font-weight: 600;
@@ -193,6 +198,12 @@ svg:hover{
     width: fit-content;
 }
 
+.img-details-modal{
+    display: block;
+}
+
+
+
 
 /* CSS LOAD */
 
@@ -232,4 +243,64 @@ svg:hover{
   to {
     transform: rotate(1turn);
   }
+}
+
+
+/* Media query : Mobile */
+
+
+@media only screen and (max-width : 576px) {
+    .grid {
+        grid-template-columns: repeat(1,1fr);
+    }
+    .card{
+        padding: 5px;
+    }
+
+    /* .img-fluid{
+        width: 50%;
+        height: auto;
+    } */
+
+    .container{
+        min-width: auto;
+        max-width: auto;
+        
+    }
+
+    .modal{
+        max-width: 400px;
+        padding: 5px;
+    }
+
+    /* .modal-card{
+        display: none;
+    } */
+
+    /* .flex-row{
+        flex-direction: column;
+    } */
+    .img-details-modal{
+        display: none;
+    }
+
+    .modal-inside{
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .font-primary{
+        font-size: 12px;
+    }
+
+    .parahraph-text{
+        font-size: 8px;
+    }
+
+    .billing{
+        padding: 5px;
+    }
+    .font-secondary{
+        font-size: 8px;
+    }
 }
