@@ -111,6 +111,7 @@ const showModalDetails = (data)=>{
                 </div>
 
                 <div class="modal-card" id='modal-card'>
+                    
                     <img src="${data.image_link[0]}" class="image-modal-fluid" alt="image">
                     <div class="text-center">
                         
@@ -143,7 +144,13 @@ const showModalDetails = (data)=>{
             li.textContent = integration;
             ulElement.appendChild(li);
         });
-    };
+    }
+    else{
+        const li = document.createElement('li');
+        li.textContent = 'No Data Found';
+        ulElement.appendChild(li);
+    }
+
     // data.input_output_examples.forEach(element=>{
     //     const div = document.createElement('div');
     //     console.log(element);
@@ -167,6 +174,16 @@ const showModalDetails = (data)=>{
             `;
             modalCard.appendChild(div);
         }
+    }
+
+    else{
+        const div = document.createElement('div');
+        div.classList.add('text-center');
+        div.innerHTML = `
+            <h3 class="font-primary">Can you give me an example</h3>
+            <p class="paragraph-text">No.Not Yet. Take a break!!</p>
+        `;
+        modalCard.appendChild(div);
     }
 }
 
